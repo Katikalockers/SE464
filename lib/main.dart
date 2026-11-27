@@ -42,34 +42,42 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).
-        colorScheme.inversePrimary,
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
       body: Column(
         children: [
-          Padding(
+          priceTextField("price per time", price),
+          priceTextField("amount of time", amount),
+          calculateButton(),
+          showTotalText(),
+          priceTextField("get money", change),
+          calculateChangeButton(),
+          showChangeText(),
+          /*Padding(
             padding: const EdgeInsets.all(8.0),
             child: priceTextField("price per time"),
           ),
+          calculateButton(),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: priceTextField("amount of time"),
           ),
+          ElevatedButton(onPressed: () {}, child: Text("Calculate Change")),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: priceTextField("get money"),
-          ),
+          ),*/
         ],
       )
     );
   }
 
-  Widget priceTextField(String text) {
+  Widget priceTextField(String text, TextEditingController control) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextField(
-        controller: price,
+        controller: control,
         decoration: InputDecoration(
           border: OutlineInputBorder(),
           labelText: 'price per time',
@@ -94,7 +102,26 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget showTotalText() {
-    return Text("total: Bath ");
+    return Text('total: $_total Baht');
+  }
+
+Widget calculateChangeButton() {
+  return ElevatedButton(onPressed: () {
+    if (price.text.isNotEmpty && amount.text.isNotEmpty){
+      _change = double.parse(change.text) - _total;
+      if(_change < 0) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Money is not enough")));
+      } else {
+        setState(() {
+          //_change;
+        });
+      }
+    }
+  }, child: Text("Calculate Change"));
+}
+
+  Widget showChangeText() {
+  return Text('change: $_change Baht');
   }
 
 }
