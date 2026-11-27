@@ -12,11 +12,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Pattama World',
+      title: 'Katika World',
       theme: ThemeData(
+        fontFamily: "maa",
         colorScheme: .fromSeed(seedColor: const Color.fromARGB(255, 183, 58, 131)),
       ),
-      home: const MyHomePage(title: 'Pattama Shop'),
+      home: const MyHomePage(title: 'Katika Shop'),
       debugShowCheckedModeBanner: false, //remove debug banner
     );
   }
@@ -47,6 +48,8 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Column(
         children: [
+          Text('Katika Shop',
+          style: TextStyle(fontFamily: "maa", fontSize: 50, fontWeight: FontWeight.bold, backgroundColor: Color.fromARGB(255, 244, 198, 233),  fontStyle: FontStyle.italic, color: Color.fromARGB(255, 193, 58, 144)),),
           priceTextField("price per time", price),
           priceTextField("amount of time", amount),
           calculateButton(),
